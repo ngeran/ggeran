@@ -9,7 +9,12 @@ function createDb() {
       "No database connection string was provided. Set DATABASE_URL."
     );
   }
-  const client = postgres(url);
+  const client = postgres(url, {
+    ssl: "require",
+    max: 1,
+    idle_timeout: 20,
+    connect_timeout: 10,
+  });
   return drizzle(client, { schema });
 }
 
