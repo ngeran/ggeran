@@ -9,22 +9,16 @@ interface PricingTier {
 }
 
 interface PricingTableProps {
-  format: string;
-  index: number;
+  title: string;
+  note: string;
   items: PricingTier[];
-  maxEdition: number;
 }
 
-export default function PricingTable({
-  format,
-  index,
-  items,
-  maxEdition,
-}: PricingTableProps) {
+export default function PricingTable({ title, note, items }: PricingTableProps) {
   return (
     <div className="border-4 border-steel-slate bg-surface-container-low p-stack-lg">
       <h3 className="font-display text-xl text-machine-white mb-stack-md border-b-2 border-safety-orange pb-2 uppercase">
-        0{index} // {format} FORMAT
+        {title}
       </h3>
       <div className="overflow-x-auto">
         <table className="w-full font-mono text-sm text-left">
@@ -50,9 +44,7 @@ export default function PricingTable({
           </tbody>
         </table>
       </div>
-      <p className="mt-4 font-mono text-xs opacity-50 uppercase italic">
-        Notes: Editions limited to {maxEdition} copies maximum.
-      </p>
+      <p className="mt-4 font-mono text-xs opacity-50 uppercase italic">{note}</p>
     </div>
   );
 }

@@ -5,11 +5,12 @@ import { usePathname, useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
 
 const navItems = [
-  { href: "/admin/settings", label: "SETTINGS", icon: "SYS" },
+  { href: "/admin/content", label: "CONTENT", icon: "CMS" },
   { href: "/admin/pricing", label: "PRICING", icon: "$$$" },
   { href: "/admin/specifications", label: "SPECS", icon: "TEC" },
   { href: "/admin/products", label: "PRODUCTS", icon: "OUT" },
   { href: "/admin/inquiries", label: "INBOX", icon: "MSG" },
+  { href: "/admin/settings", label: "SETTINGS", icon: "SYS" },
 ];
 
 export default function AdminNav() {
@@ -36,7 +37,7 @@ export default function AdminNav() {
             key={item.href}
             href={item.href}
             className={`flex items-center gap-stack-sm px-stack-md py-stack-sm font-mono text-xs uppercase tracking-widest transition-colors ${
-              pathname === item.href
+              pathname === item.href || (item.href !== "/admin" && pathname?.startsWith(item.href))
                 ? "bg-safety-orange text-lathe-charcoal font-bold"
                 : "text-on-surface/60 hover:text-machine-white hover:bg-surface-container"
             }`}

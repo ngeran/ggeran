@@ -14,24 +14,23 @@ export default function Introduction({ settings }: IntroductionProps) {
         </div>
         <div className="md:col-span-8 flex flex-col gap-stack-lg">
           <p className="font-mono text-base md:text-lg text-on-background leading-relaxed">
-            {settings.intro_body ||
-              "We operate at the intersection of microscopic accuracy and physical warmth. Our service bridges the gap for labels and creators requiring limited edition, high-durability physical media. From a single bespoke master to a run of 100 archival copies, we deliver the definitive analog experience."}
+            {settings.intro_body || ""}
           </p>
           <div className="grid grid-cols-2 gap-stack-lg border-t-2 border-steel-slate pt-stack-lg">
             <div>
               <p className="font-mono text-xs text-safety-orange uppercase mb-1">
-                CAPACITY_RANGE
+                {settings.intro_stat1_label || "CAPACITY_RANGE"}
               </p>
               <p className="font-mono text-sm text-machine-white">
-                01 - 100 COPIES
+                {settings.intro_stat1_value || "01 - 100 COPIES"}
               </p>
             </div>
             <div>
               <p className="font-mono text-xs text-safety-orange uppercase mb-1">
-                LATENCY_STATUS
+                {settings.intro_stat2_label || "LATENCY_STATUS"}
               </p>
               <p className="font-mono text-sm text-machine-white">
-                14 DAY TURNAROUND
+                {settings.intro_stat2_value || "14 DAY TURNAROUND"}
               </p>
             </div>
           </div>

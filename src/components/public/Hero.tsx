@@ -5,17 +5,13 @@ interface HeroProps {
 }
 
 export default function Hero({ settings }: HeroProps) {
-  const heroImage =
-    settings.hero_image_url ||
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuBa-JMxf1vPN3o3fet1-AFV1vrhs-ceZpK6IQQ3Qof_Gi1MEl2ALEcEt5l4s1Z6m3zbRIgXHfGtvY4Y8SwQiDibHFI1ewbR_U0oA3AYdxNcYy6DW5gZ-4CthO0-1O3w769QndXhTmcRLXV-84Elyu7rrDcFsv0nse-4pqzPToc_g8fd8SLB_bXnJ3r7Fx331ng3QkPXPvFWDJZ07O7o_ypzPevifC6CJTQEHBd9B8sI4h7fUxWs0rz-QDgxu6M-UUlmJrf-jVDAWqee";
-
   return (
     <section className="relative h-[921px] border-b-4 border-steel-slate overflow-hidden flex flex-col justify-end">
       <div className="absolute inset-0 z-0">
         <img
           className="w-full h-full object-cover opacity-60 grayscale hover:grayscale-0 transition-all duration-700"
-          src={heroImage}
-          alt="Precision record-cutting lathe in operation"
+          src={settings.hero_image_url || ""}
+          alt="Hero background"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
         <div className="absolute inset-0 groove-pattern opacity-30" />
@@ -39,19 +35,34 @@ export default function Hero({ settings }: HeroProps) {
             <div className="flex items-baseline gap-stack-sm">
               <Counter target={Number(settings.counter_target || 50352)} />
               <span className="font-mono text-lg text-safety-orange font-bold">
-                DISCS CUT
+                {settings.counter_label || "DISCS CUT"}
               </span>
             </div>
           </div>
           <div className="flex flex-col items-start gap-stack-md">
             <p className="font-mono text-base md:text-lg text-machine-white max-w-md leading-relaxed">
-              {settings.hero_description ||
-                "Hand-crafted sonic preservation through precision mechanical etching. Every groove is a signature of engineering excellence."}
+              {settings.hero_description || ""}
             </p>
-            <button className="bg-safety-orange text-lathe-charcoal px-stack-lg py-4 font-mono font-bold uppercase border-2 border-lathe-charcoal brutal-shadow active:brutal-shadow-active transition-all">
-              START YOUR CUT
-            </button>
+            <a
+              href="#contact"
+              className="bg-safety-orange text-lathe-charcoal px-stack-lg py-4 font-mono font-bold uppercase border-2 border-lathe-charcoal brutal-shadow active:brutal-shadow-active transition-all inline-block"
+            >
+              {settings.hero_button_text || "START YOUR CUT"}
+            </a>
           </div>
+        </div>
+
+        <div className="mt-stack-lg flex items-center gap-stack-md">
+          <div className="flex items-center gap-stack-sm">
+            <div className="w-2 h-2 bg-green-500 animate-pulse" />
+            <span className="font-mono text-xs text-on-surface/60 uppercase">
+              {settings.lathe_status || "OPERATIONAL"}
+            </span>
+          </div>
+          <span className="font-mono text-xs text-steel-slate">|</span>
+          <span className="font-mono text-xs text-on-surface/60 uppercase">
+            SESSION: {settings.session_q || "Q3 2024"}
+          </span>
         </div>
       </div>
     </section>
