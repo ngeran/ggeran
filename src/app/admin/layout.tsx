@@ -11,7 +11,9 @@ export default async function AdminLayout({
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    redirect("/admin");
+    return (
+      <div className="min-h-screen bg-lathe-charcoal">{children}</div>
+    );
   }
 
   return (

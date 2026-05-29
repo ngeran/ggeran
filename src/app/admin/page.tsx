@@ -1,9 +1,16 @@
 "use client";
 
-import { signIn } from "next-auth/react";
-import { useState } from "react";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function AdminLogin() {
+  const { data: session } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (session) router.push("/admin/content");
+  }, [session, router]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
