@@ -16,26 +16,31 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) return null;
 
-        const db = getDb();
-        const user = await db
-          .select()
-          .from(users)
-          .where(eq(users.email, credentials.email))
-          .limit(1);
+        try {
+          const db = getDb();
+          const user = await db
+            .select()
+            .from(users)
+            .where(eq(users.email, credentials.email))
+            .limit(1);
 
-        if (!user.length) return null;
+          if (!user.length) return null;
 
-        const valid = await bcrypt.compare(
-          credentials.password,
-          user[0].passwordHash
-        );
-        if (!valid) return null;
+          const valid = await bcrypt.compare(
+            credentials.password,
+            user[0].passwordHash
+          );
+          if (!valid) return null;
 
-        return {
-          id: user[0].id,
-          email: user[0].email,
-          name: user[0].name,
-        };
+          return {
+            id: user[0].id,
+            email: user[0].email,
+            name: user[0].name,
+          };
+        } catch (err) {
+          console.error("Auth error:", err);
+          return null;
+        }
       },
     }),
   ],
@@ -46,4 +51,5 @@ export const authOptions: NextAuthOptions = {
     signIn: "/admin",
   },
   secret: process.env.NEXTAUTH_SECRET,
+  debug: process.env.NODE_ENV === "development",
 };

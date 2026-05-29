@@ -2,7 +2,7 @@ import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 import * as schema from "./schema";
 
-function createDb() {
+export function getDb() {
   const url = process.env.DATABASE_URL;
   if (!url) {
     throw new Error(
@@ -16,13 +16,4 @@ function createDb() {
     connect_timeout: 10,
   });
   return drizzle(client, { schema });
-}
-
-let _db: ReturnType<typeof createDb> | null = null;
-
-export function getDb() {
-  if (!_db) {
-    _db = createDb();
-  }
-  return _db;
 }
